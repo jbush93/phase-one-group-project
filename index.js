@@ -1,12 +1,14 @@
 const url = 'https://api.spacexdata.com/v5/launches'
-const flightName = document.querySelector('#cake-name')
-const flightImg = document.querySelector('#cake-image')
-const flightDescription = document.querySelector('#cake-description')
-// const cakeReviews = document.querySelector('#review-list li')
+const flightName = document.querySelector('#missionName')
+const flightImg = document.querySelector('#flight-image')
+const flightDescription = document.querySelector('#flight-description')
+const launchDate = document.querySelector('#launchDate')
+const missionSuccess = document.querySelector('#success')
+const missionRocket = document.querySelector('#rocket')
 const previousBtn = document.querySelector('#previous')
 const nextBtn = document.querySelector('#next')
 
-const nav = document.querySelector('#cake-list')
+const nav = document.querySelector('#launch-list')
 const form = document.querySelector('#review-form')
 let flightArr
 let currentFlight
@@ -45,8 +47,11 @@ function renderData(launch)
     newLI.addEventListener('click', function (evt)
     {
         evt.preventDefault()
-        flightName.innerText = `${launch.name} - Mission Success: ${launch.success}`
-        flightDescription.innerText = `Mission Name: ${launch.name} | Launch Date: ${launch.date_local} | Rocket: ${launch.rocket} | Details: ${launch.details} | Flight Number: ${launch.flight_number}`
+        flightName.innerText = `${launch.name} - Flight #: ${launch.flight_number}`
+        launchDate.innerText = launch.date_local
+        missionSuccess.innerText = launch.success
+        missionRocket.innerText = launch.rocket
+        flightDescription.innerText = launch.details
         flightImg.src = launch.links.patch.small
 
         currentFlight = launch.flight_number
@@ -61,8 +66,11 @@ function renderData(launch)
 
 function flightDetail(launchData)
 {
-    flightName.innerText = `${launchData.name} - Mission Success: ${launchData.success}`
-    flightDescription.innerText = `Mission Name: ${launchData.name} | Launch Date: ${launchData.date_local} | Rocket: ${launchData.rocket} | Details: ${launchData.details} | Flight Number: ${launchData.flight_number}`
+    flightName.innerText = `${launchData.name} - Flight #: ${launchData.flight_number}`
+    launchDate.innerText = launchData.date_local
+    missionSuccess.innerText = launchData.success
+    missionRocket.innerText = launchData.rocket
+    flightDescription.innerText = launchData.details
     flightImg.src = launchData.links.patch.small
 }
 
@@ -74,8 +82,11 @@ document.addEventListener('DOMContentLoaded', function (evt)
     previousBtn.addEventListener('click', function ()
     {
         console.log(flightArr[previousFlight].name)
-        flightName.innerText = `${flightArr[previousFlight].name} - Mission Success: ${flightArr[previousFlight].success}`
-        flightDescription.innerText = `Mission Name: ${flightArr[previousFlight].name} | Launch Date: ${flightArr[previousFlight].date_local} | Rocket: ${flightArr[previousFlight].rocket} | Details: ${flightArr[previousFlight].details} | Flight Number: ${flightArr[previousFlight].flight_number}`
+        flightName.innerText = `${flightArr[previousFlight].name} - Flight #:: ${flightArr[previousFlight].flight_number}`
+        launchDate.innerText = flightArr[previousFlight].date_local
+        missionSuccess.innerText = flightArr[previousFlight].success
+        missionRocket.innerText = flightArr[previousFlight].rocket
+        flightDescription.innerText = flightArr[previousFlight].details
         flightImg.src = flightArr[previousFlight].links.patch.small
 
         currentFlight = flightArr[previousFlight].flight_number
@@ -93,8 +104,11 @@ document.addEventListener('DOMContentLoaded', function (evt)
     nextBtn.addEventListener('click', function ()
     {
         console.log(flightArr[currentFlight].name)
-        flightName.innerText = `${flightArr[currentFlight].name} - Mission Success: ${flightArr[currentFlight].success}`
-        flightDescription.innerText = `Mission Name: ${flightArr[currentFlight].name} | Launch Date: ${flightArr[currentFlight].date_local} | Rocket: ${flightArr[currentFlight].rocket} | Details: ${flightArr[currentFlight].details} | Flight Number: ${flightArr[currentFlight].flight_number}`
+        flightName.innerText = `${flightArr[currentFlight].name} - Flight #:: ${flightArr[currentFlight].flight_number}`
+        launchDate.innerText = flightArr[currentFlight].date_local
+        missionSuccess.innerText = flightArr[currentFlight].success
+        missionRocket.innerText = flightArr[currentFlight].rocket
+        flightDescription.innerText = flightArr[currentFlight].details
         flightImg.src = flightArr[currentFlight].links.patch.small
 
         currentFlight = flightArr[currentFlight].flight_number
