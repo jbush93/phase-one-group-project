@@ -10,15 +10,6 @@ h1 {
     max-width: fit-content;
 }
 
-nav {
-    /* need to make this scrollable maybe */
-    /* width: 25vw;
-    height: 100vh; */
-
-
-
-}
-
 .flight-details {
     position: absolute;
     top: 100px;
