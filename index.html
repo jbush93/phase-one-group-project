@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Fantastic Flatiron Cake Off</title>
+    <title>SpaceX Launch Data</title>
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Open+Sans:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="main.css" />
     <script defer type="text/javascript" src="index.js"></script>
@@ -11,15 +11,25 @@
 <body>
     <header>
         <h1>SpaceX Launch Data</h1>
+        <form id="search-form">
+            <label for="description">Flight Lookup: </label>
+            <textarea id="description"></textarea>
+            <button type="submit">Search</button>
+        </form>
+
         <nav>
             <ul id="launch-list">
             </ul>
         </nav>
+        <br>
+        <button id="dark">Toggle Dark Mode</button>
     </header>
 
     <main>
         <!-- have some redundancies with name and mission name. consider consolidating to one or the other -->
         <div class="flight-details">
+            <button id="previous">Previous Launch</button>
+            <button id="next">Next Launch</button>
             <img id="flight-image" alt="Flight Name Goes Here" src="assets/image-placeholder.jpg" />
             <h4>Mission Name & Flight Number:</h4>
             <p id="missionName">insert name</p>
@@ -33,25 +43,6 @@
             <p>
                 <em id="flight-description">flight desc</em>
             </p>
-
-            <button id="previous">Previous Launch</button>
-            <button id="next">Next Launch</button>
-
-            <!-- <form id="description-form">
-        <label for="description">Edited Description:</label>
-        <textarea id="description"></textarea>
-        <button type="submit">Update Cake</button>
-      </form>
-
-      <h3>Customer Reviews</h3>
-      <ul id="review-list">
-        <li>Replace with actual reviews</li>
-      </ul>
-      <form id="review-form">
-        <label for="review">Your Review:</label>
-        <textarea id="review" name="review"></textarea>
-        <button type="submit">Add review</button>
-      </form> -->
         </div>
     </main>
 </body>

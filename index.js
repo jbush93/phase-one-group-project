@@ -7,9 +7,10 @@ const missionSuccess = document.querySelector('#success')
 const missionRocket = document.querySelector('#rocket')
 const previousBtn = document.querySelector('#previous')
 const nextBtn = document.querySelector('#next')
-
+const darkModeBtn = document.querySelector('#dark')
+const form = document.querySelector('#form')
 const nav = document.querySelector('#launch-list')
-const form = document.querySelector('#review-form')
+
 let flightArr
 let currentFlight
 let previousFlight
@@ -25,9 +26,11 @@ function fetchAll()
         {
             flightArr = data
             currentFlight = flightArr[0].flight_number
-            // previousFlight = 
+            // console.log(data)
             data.map(function (launchData) 
             {
+
+                console.log(launchData)
                 renderData(launchData)
             })
 
@@ -41,10 +44,10 @@ function renderData(launch)
     const newLI = document.createElement('li');
     newLI.innerText = launch.name;
     // newLI.innerText += ` - ${launch.date_local}`
-    console.log(`Mission Name: ${launch.name} | Launch Date: ${launch.date_local} | Rocket: ${launch.rocket} | Flight Number: ${launch.flight_number}`)
+    // console.log(`Mission Name: ${launch.name} | Launch Date: ${launch.date_local} | Rocket: ${launch.rocket} | Flight Number: ${launch.flight_number}`)
     nav.append(newLI)
 
-    newLI.addEventListener('click', function (evt)
+    newLI.addEventListener('mouseover', function (evt)
     {
         evt.preventDefault()
         flightName.innerText = `${launch.name} - Flight #: ${launch.flight_number}`
@@ -78,7 +81,20 @@ document.addEventListener('DOMContentLoaded', function (evt)
 {
     evt.preventDefault()
     fetchAll()
-    // form.addEventListener('submit', submitForm)
+
+    darkModeBtn.addEventListener('click', function ()
+    {
+        console.log('dark mode button clicked.')
+        let el = document.body
+        el.classList.toggle('dark-mode')
+    })
+
+    // form.addEventListener('submit', function (evt)
+    // {
+    //     evt.preventDefault
+    //     console.log('form submit')
+    // })
+
     previousBtn.addEventListener('click', function ()
     {
         console.log(flightArr[previousFlight].name)
