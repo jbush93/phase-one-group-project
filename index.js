@@ -89,12 +89,6 @@ document.addEventListener('DOMContentLoaded', function (evt)
         el.classList.toggle('dark-mode')
     })
 
-    // form.addEventListener('submit', function (evt)
-    // {
-    //     evt.preventDefault
-    //     console.log('form submit')
-    // })
-
     // button functions
     previousBtn.addEventListener('click', function ()
     {
@@ -133,5 +127,11 @@ document.addEventListener('DOMContentLoaded', function (evt)
         console.log(flightArr[previousFlight])
         console.log(`Previous flight array: ${previousFlight}`)
     })
+
+    // form.addEventListener('submit', function (evt)
+    // {
+    //     evt.preventDefault
+    //     console.log('form submit')
+    // })
 
 })
