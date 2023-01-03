@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function (evt)
     //     console.log('form submit')
     // })
 
+    // button functions
     previousBtn.addEventListener('click', function ()
     {
         console.log(flightArr[previousFlight].name)
