@@ -7,6 +7,11 @@ h1 {
     color: azure;
 } */
 
+div {
+    float: left;
+    width: 33%;
+}
+
 #launch-list {
     overflow: scroll;
     height: 50vh;
@@ -15,27 +20,32 @@ h1 {
     max-width: fit-content;
     scrollbar-color: teal;
     scrollbar-width: thin;
+    width: 100%;
 }
 
 ul {
     list-style: none;
+    list-style-image: url("rocket2.png");
 }
 
 #launch-list li {
     cursor: pointer;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 
 }
 
-.flight-details {
+/* .flight-details {
     position: absolute;
     top: 100px;
     left: 800px;
     right: 800px;
     text-align: center;
     word-wrap: normal;
-}
+    margin-bottom: 100px;
+} */
 
 body {
     text-align: center;
@@ -53,7 +63,7 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#search-form {
+#api-form {
     text-align: left;
     cursor: pointer;
 }

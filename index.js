@@ -1,14 +1,18 @@
 const url = 'https://api.spacexdata.com/v5/launches'
+const dbUrl = 'http://localhost:3000/launches'
 const flightName = document.querySelector('#missionName')
 const flightImg = document.querySelector('#flight-image')
 const flightDescription = document.querySelector('#flight-description')
+const reviewDiv = document.querySelector('.reviews')
 const launchDate = document.querySelector('#launchDate')
 const missionSuccess = document.querySelector('#success')
 const missionRocket = document.querySelector('#rocket')
 const previousBtn = document.querySelector('#previous')
 const nextBtn = document.querySelector('#next')
 const darkModeBtn = document.querySelector('#dark')
-const form = document.querySelector('#form')
+const apiForm = document.querySelector('#api-form')
+const reviewForm = document.querySelector('#review')
+const editForm = document.querySelector('#editReviews')
 const nav = document.querySelector('#launch-list')
 
 let flightArr
@@ -26,7 +30,7 @@ function fetchAll()
         {
             flightArr = data
             currentFlight = flightArr[0].flight_number
-            // console.log(data)
+            console.log(data)
             data.map(function (launchData) 
             {
 
@@ -36,6 +40,24 @@ function fetchAll()
 
             flightDetail(flightArr[0])
 
+        })
+}
+
+function fetchDB()
+{
+    fetch(dbUrl)
+        .then(function (res)
+        {
+            return res.json()
+        })
+        .then(function (data)
+        {
+            console.log(data)
+            data.map(function (dbLD)
+            {
+                console.log(dbLD)
+                renderDBData(dbLD)
+            })
         })
 }
 
@@ -66,10 +88,21 @@ function renderData(launch)
     })
 
 }
+function renderDBData(dbLD)
+{
+    const h5 = document.createElement('h5')
+    const p = document.createElement('p')
+
+    h5.innerText = `${dbLD.name} | ID: ${dbLD.id}`
+    p.innerText = dbLD.review
+
+    reviewDiv.append(h5)
+    reviewDiv.append(p)
+}
 
 function flightDetail(launchData)
 {
-    flightName.innerText = `${launchData.name} - Flight #: ${launchData.flight_number}`
+    flightName.innerText = `${launchData.name} - Flight #: ${launchData.flight_number} `
     launchDate.innerText = launchData.date_local
     missionSuccess.innerText = launchData.success
     missionRocket.innerText = launchData.rocket
@@ -77,10 +110,75 @@ function flightDetail(launchData)
     flightImg.src = launchData.links.patch.small
 }
 
+function submitForm(evt)
+{
+    evt.preventDefault()
+
+    let formData = {
+        name: evt.target.name.value,
+        review: evt.target.newReview.value
+    }
+
+    console.log(evt.target.name.value)
+    console.log(evt.target.newReview.value)
+
+    fetch(dbUrl, {
+        method: 'POST',
+        headers: {
+            "Content-type": 'application/json',
+            "Accept": 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(function (res)
+        {
+            return res.json()
+        })
+        .then(function (data)
+        {
+            renderDBData(data)
+        })
+}
+
+function submitEditForm(evt)
+{
+    evt.preventDefault()
+    console.log(evt)
+
+    let formData = {
+        review: evt.target.updateReview.value
+    }
+
+    let id = evt.target.ids.value
+    console.log(id)
+
+
+    console.log(evt.target.ids.value)
+    console.log(evt.target.updateReview.value)
+
+    fetch(`${dbUrl}/${id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-type": 'application/json',
+            "Accept": 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(function (res)
+        {
+            return res.json()
+        })
+        .then(function (data)
+        {
+            renderDBData(data)
+        })
+}
+
 document.addEventListener('DOMContentLoaded', function (evt)
 {
     evt.preventDefault()
     fetchAll()
+    fetchDB()
 
     darkModeBtn.addEventListener('click', function ()
     {
@@ -128,10 +226,23 @@ document.addEventListener('DOMContentLoaded', function (evt)
         console.log(`Previous flight array: ${previousFlight}`)
     })
 
-    // form.addEventListener('submit', function (evt)
+    // apiForm.addEventListener('submit', function (evt)
     // {
-    //     evt.preventDefault
-    //     console.log('form submit')
+    //     evt.preventDefault()
+    //     const query = encodeURI(evt.target.search.value)
+    //     console.log(query)
+    //     let data = {
+    //         "options": { flight_number }
+    //     }
+    //     fetch(`https://api.spacexdata.com/v5/launches/query${data}`)
+    //         .then(function (res)
+    //         {
+    //             console.log(res)
+    //         })
     // })
 
+    reviewForm.addEventListener('submit', submitForm)
+    editForm.addEventListener('submit', submitEditForm)
+
 })
+

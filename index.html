@@ -10,25 +10,27 @@
 <body>
     <header>
         <h1>SpaceX Launch Data</h1>
-        <form id="search-form">
-            <label for="description">Flight Lookup: </label>
-            <textarea id="description"></textarea>
-            <button type="submit">Search</button>
-        </form>
-
-        <nav>
-            <ul id="launch-list">
-            </ul>
-        </nav>
-        <br>
-        <button id="dark">Toggle Dark Mode</button>
     </header>
-
     <main>
         <!-- have some redundancies with name and mission name. consider consolidating to one or the other -->
+        <div class="navigation">
+            <!-- <form id="api-form">
+                <label for="description">Flight Lookup: </label>
+                <input type="text" name="search" id="description"></input>
+                <input type="submit"></input>
+            </form> -->
+
+            <nav>
+                <ul id="launch-list">
+                </ul>
+            </nav>
+            <br>
+            <button id="dark">Toggle Dark Mode</button>
+        </div>
         <div class="flight-details">
             <button id="previous">Previous Launch</button>
             <button id="next">Next Launch</button>
+            <br>
             <img id="flight-image" alt="Flight Name Goes Here" src="assets/image-placeholder.jpg" />
             <h4>Mission Name & Flight Number:</h4>
             <p id="missionName">insert name</p>
@@ -42,6 +44,31 @@
             <p>
                 <em id="flight-description">flight desc</em>
             </p>
+        </div>
+        <div class="reviews">
+            <form id="review">
+                <h4>Fan Reviews</h4>
+                <br>
+                <label for="name">Launch Name: </label>
+                <input type="text" name="name" id="addName" />
+                <br>
+                <label for="new-reviews">Comment: </label>
+                <textarea name="newReview" id="newReview"></textarea>
+                <br>
+                <input type="submit" value="Create" />
+            </form>
+        </div>
+        <div class="edit-reviews">
+            <form id="editReviews">
+                <h4>Update Review</h4>
+                <label for="ID">ID: </label>
+                <input type="number" name="ids" id="updateID" />
+                <br>
+                <label for="new-reviews">Review: </label>
+                <textarea name="updateReview" id="update-review"></textarea>
+                <br>
+                <input type="submit" value="Update" />
+            </form>
         </div>
     </main>
 </body>
